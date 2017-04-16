@@ -1,3 +1,5 @@
+package advance_data_structures;
+
 import java.util.*;
 
 abstract class HuffmanTree implements Comparable<HuffmanTree> {

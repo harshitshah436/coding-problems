@@ -2,3 +2,4 @@ bin/
 src/Test.java
 /build/
 build/classes/
+/dist/

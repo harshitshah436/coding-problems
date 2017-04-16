@@ -1,3 +1,5 @@
+package advance_data_structures;
+
 /**
  * MinHeap problem has two main operation while implementation.
  * 1) insert - (insert at last position, right most leaf, then bubble up till root)
