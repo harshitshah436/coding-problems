@@ -25,7 +25,7 @@ public class LongestPalindromicSubsequence {
         int lpsR = lpsRecursive(str);
         System.out.println("Recursive Method:" + lpsR);
         int lpsD = lpsDynamicProgramming(str);
-        System.out.println("Recursive Method:" + lpsD);
+        System.out.println("Dynamic Programming Method:" + lpsD);
     }
 
     private static int lpsRecursive(String str) {
