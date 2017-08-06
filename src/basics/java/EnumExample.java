@@ -1,4 +1,4 @@
-package java_basics;
+package basics.java;
 
 /**
  * Java Enum examples for enum declaration, enum with values, declaring in a

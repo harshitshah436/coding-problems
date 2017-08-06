@@ -1,6 +1,5 @@
 package arrays;
 
-
 import java.util.Arrays;
 
 /*
@@ -52,6 +51,6 @@ public class TwoArrayElementsTargetToSum {
         }
         return false;
 
-        // Can be improvised using dynamic programming constructing two matrices of the length of the array. Will tryout later if time left.
+        // Easy approch but tricky: Store one array values in HashSet(). Then iterate throught second array and check sum-arry[i] exist in our hashset. If true return. O(n) approch.
     }
 }

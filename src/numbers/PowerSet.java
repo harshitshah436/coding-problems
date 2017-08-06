@@ -27,10 +27,10 @@ public class PowerSet {
     private static ArrayList<ArrayList<Integer>> getSubsets2(ArrayList<Integer> set) {
         int max = 1 << set.size(); // Find max size/ number of elements of subsets.
         ArrayList<ArrayList<Integer>> subsets = new ArrayList<>();
-        for (int i = 0; i < max; i++) { // O(n) time.
+        for (int i = 0; i < max; i++) { // O(2^n) time.
             ArrayList<Integer> subset = new ArrayList<>();
             int index = 0;
-            for (int j = i; j > 0; j >>= 1) {  // O(2^n) time.
+            for (int j = i; j > 0; j >>= 1) {  // O(n) time.
                 if ((j & 1) == 1) {
                     subset.add(set.get(index));
                 }
