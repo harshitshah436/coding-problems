@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dynamic_programming;
 
 /**
@@ -28,6 +23,13 @@ public class LongestPalindromicSubsequence {
         System.out.println("Dynamic Programming Method:" + lpsD);
     }
 
+    /**
+     * This method can be improved using Top-bottom recursive approach same as
+     * below with Memoization.
+     *
+     * @param str
+     * @return
+     */
     private static int lpsRecursive(String str) {
 
         char[] chars = str.toCharArray();
@@ -61,7 +63,7 @@ public class LongestPalindromicSubsequence {
                 if (str.charAt(i) == str.charAt(j)) {
                     L[i][j] = L[i + 1][j - 1] + 2;
                 } else {
-                    L[i][j] = Math.max(L[i+1][j], L[i][j-1]);
+                    L[i][j] = Math.max(L[i + 1][j], L[i][j - 1]);
                 }
             }
         }

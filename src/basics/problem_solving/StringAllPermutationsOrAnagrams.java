@@ -1,6 +1,5 @@
 package basics.problem_solving;
 
-
 import java.util.ArrayList;
 
 /**
@@ -14,18 +13,18 @@ public class StringAllPermutationsOrAnagrams {
      *
      * Easy to understand and code.
      *
-     * @param suffix
      * @param prefix
+     * @param suffix
      * @param list
      * @return
      */
-    public static ArrayList<String> allPermuatations(String suffix, String prefix, ArrayList<String> list) {
-        int n = prefix.length();
+    public static ArrayList<String> allPermuatations(String prefix, String suffix, ArrayList<String> list) {
+        int n = suffix.length();
         if (n == 0) {
-            list.add(suffix);
+            list.add(prefix);
         }
         for (int i = 0; i < n; i++) {
-            allPermuatations(suffix + prefix.charAt(i), prefix.substring(0, i) + prefix.substring(i + 1), list);
+            allPermuatations(prefix + suffix.charAt(i), suffix.substring(0, i) + suffix.substring(i + 1), list);
         }
         return list;
     }
@@ -39,8 +38,8 @@ public class StringAllPermutationsOrAnagrams {
      * http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
      *
      * @param str
-     * @param l
-     * @param r
+     * @param left
+     * @param right
      * @param list
      * @return
      */
