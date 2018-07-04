@@ -14,19 +14,6 @@ package strings;
  */
 public class StringAnagrams {
 
-    private static boolean areAnagram2(String string1, String string2) {
-        if (string1.length() != string2.length())
-            return false;
-        int count = 0;
-        for (int i = 0; i < string1.length(); i++) {
-            count += string1.charAt(i) - string2.charAt(i);
-        }
-        if (count == 0)
-            return true;
-
-        return false;
-    }
-    
     public static boolean areAnagram(String string1, String string2) {
 
         if (string1.length() != string2.length())
@@ -58,7 +45,6 @@ public class StringAnagrams {
 
     public static void main(String[] args) {
         System.out.println(areAnagram("harshitshah", "shahharshit"));
-        System.out.println(areAnagram2("harshitshah", "shahharshit"));
     }
 
 }
