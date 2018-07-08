@@ -52,6 +52,9 @@ public class MapBasics {
         for (int i : map.values()) {
             System.out.println(i);
         }
+        // Use of functional operation and member reference
+        map.values().forEach(System.out::println);
+        
         System.out.println("----------------------------");
         // OR to get into a list and perform sort
         ArrayList<Integer> list = new ArrayList<>(map.values());

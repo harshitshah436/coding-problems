@@ -1,4 +1,4 @@
-package graphs;
+package basics.problem_solving;
 
 import java.util.LinkedList;
 import java.util.Stack;

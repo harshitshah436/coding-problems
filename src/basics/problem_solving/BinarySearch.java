@@ -1,4 +1,4 @@
-package sorting_and_searching;
+package basics.problem_solving;
 
 /**
  * BinarySearch using iterative and recursion.
