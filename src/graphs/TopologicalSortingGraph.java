@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package graphs;
 
 import java.util.Iterator;
@@ -10,6 +5,11 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 /**
+ * We can only do Topological sorting on DAG (Directed Acyclic Graph). DAG
+ * means, there is not any cycle in the graph and graph must be directed.
+ * (incoming or outgoing edges). One more thing, The first vertex in topological
+ * sorting is always a vertex with in-degree as 0 (a vertex with no incoming
+ * edges).
  *
  * Ref: http://www.geeksforgeeks.org/topological-sorting/ Implemented this
  * method using DFS
@@ -33,19 +33,16 @@ public class TopologicalSortingGraph {
         }
     }
 
-    private void topologicalSortUtil(int v, boolean[] visited, Stack stack) {
-        visited[v] = true;
+    private void topologicalSortUtil(int u, boolean[] visited, Stack stack) {
+        visited[u] = true;
 
-        Iterator<Integer> it = adj[v].iterator();
-
-        while (it.hasNext()) {
-            int i = it.next();
-            if (!visited[i]) {
-                topologicalSortUtil(i, visited, stack);
+        for(int v : adj[u]) {
+            if (!visited[v]) {
+                topologicalSortUtil(v, visited, stack);
             }
         }
 
-        stack.push(v);
+        stack.push(u);
     }
 
     private void topologicalSort() {
