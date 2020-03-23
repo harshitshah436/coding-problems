@@ -40,9 +40,16 @@ public class UsefulOperations {
         int[][] two_dim_arr = new int[][]{{0, 1}, {2, 3}};
         System.out.println(Arrays.deepToString(two_dim_arr));
 
-        // Print a number with spaces
+        // Printf function as formatter
         System.out.printf("%3d", 8); // useful to print matrix
         System.out.println();
+        System.out.printf("%15s", "Harshit"); // 15 char justified string (default: right aligned)
+        System.out.println();
+        System.out.printf("%-15s", "Harshit"); // left aligned
+        System.out.println();
+        System.out.printf("%03d", 11); // 3 decimal with 0 filled.
+        System.out.println();
+        System.out.printf("%-15s%03d\n", "Harshit", 11);
 
         // Shallow copy of an object using Object.clone() method. Also works deep copy for primitive types 1 dimentional arrays.
         int[] arr1 = arr.clone();
