@@ -4,6 +4,10 @@ public class LinkedList {
     Node head;
     int elemCount;
 
+    public LinkedList() {
+        head = null;
+    }
+
     public void add(int data) {
         if (head == null)
             head = new Node(data);
@@ -20,23 +24,6 @@ public class LinkedList {
             }
         }
         elemCount++;
-    }
-
-    public LinkedList() {
-        head = null;
-    }
-
-    private static void printList(LinkedList ls) {
-        if (ls.head != null) {
-            Node temp = ls.head;
-            System.out.print("[" + temp);
-            while (temp.next != null) {
-                temp = temp.next;
-                System.out.print(" " + temp);
-            }
-            System.out.println("]");
-        }
-
     }
 
     private static void removeElementAtIndex(LinkedList ls, int index) {
@@ -67,22 +54,17 @@ public class LinkedList {
     }
 
     private static Node reverseLinkedListRecursive(Node head) {
-        Node current = head;
-
-        if (current == null || current.next == null) {
-            return current;
+        // Go to the last element of Linked list
+        if (head == null || head.next == null) {
+            return head;
         }
+        Node last = reverseLinkedListRecursive(head.next);
 
-        // get second node
-        Node second = head.next;
-        // set first's next to be null
-        head.next = null;
+        // Now reverse the link of head
+        head.next.next = head; // reverse the link
+        head.next = null; // remove current link
 
-        // we reverse everything from the second element on
-        Node rest = reverseLinkedListRecursive(second);
-        second.next = current;
-
-        return rest;
+        return last;
     }
 
     public static void main(String[] args) {
@@ -110,6 +92,18 @@ public class LinkedList {
 
         System.out.println("Reverse Linked list recursive way: ");
         printList(ls);
+    }
+
+    private static void printList(LinkedList ls) {
+        if (ls.head != null) {
+            Node temp = ls.head;
+            System.out.print("[" + temp);
+            while (temp.next != null) {
+                temp = temp.next;
+                System.out.print(" " + temp);
+            }
+            System.out.println("]");
+        }
     }
 
     class Node {
