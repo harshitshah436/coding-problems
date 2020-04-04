@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cracking_coding_interview.chapter2_linkedlists;
+package linked_lists.ctci;
 
 /**
  * Add two numbers represented by linked lists.

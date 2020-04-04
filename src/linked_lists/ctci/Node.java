@@ -1,4 +1,4 @@
-package cracking_coding_interview.chapter2_linkedlists;
+package linked_lists.ctci;
 
 /**
  * Simple Implementation of Linkedlist. (add, delete methods)
