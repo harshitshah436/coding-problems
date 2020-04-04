@@ -17,9 +17,10 @@ public class QuickSort {
     }
 
     public static int partition(int[] arr, int left, int right) {
-        int pivot = arr[(left + right) / 2]; // Pick a pivot point. Can be an element		
+        int pivot = arr[(left + right) / 2]; // Pick a pivot point. Can be any
+                                             // element
 
-        while (left <= right) { // Until we've gone through the whole array
+        while (left <= right) {
             // Find element on left that should be on right
             while (arr[left] < pivot) {
                 left++;
@@ -41,26 +42,26 @@ public class QuickSort {
     }
 
     public static void quickSort(int[] arr, int left, int right) {
-        int index = partition(arr, left, right);
-        if (left < index - 1) { // Sort left half
-            quickSort(arr, left, index - 1);
-        }
-        if (index < right) { // Sort right half
-            quickSort(arr, index, right);
+        if (left < right) {
+            // partitioning index
+            int pi = partition(arr, left, right);
+
+            quickSort(arr, left, pi - 1); // Sort left half
+            quickSort(arr, pi, right); // Sort right half including pi
         }
     }
 
     public static void main(String[] args) {
-        int[] a = {3, -9, 5, 7, 2, 1, -5, 0};
-        
+        int[] a = { 3, -9, 5, 7, 2, 1, -5, 0 };
+
         for (int i = 0; i < a.length; i++) {
             System.out.print(a[i] + " ");
         }
         System.out.println("");
         System.out.println("-----------------");
-        
+
         quickSort(a, 0, a.length - 1);
-        
+
         for (int i = 0; i < a.length; i++) {
             System.out.print(a[i] + " ");
         }
