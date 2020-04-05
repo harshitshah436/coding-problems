@@ -1,6 +1,7 @@
 package basics.problem_solving;
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Stack;
 public class Graph {
 
     int V; // no of vertices
-    LinkedList<Integer>[] adj; //adjecency lists
+    LinkedList<Integer>[] adj; // adjacency lists
 
     @SuppressWarnings("unchecked")
     public Graph(int V) {
@@ -35,12 +36,12 @@ public class Graph {
      */
     private void BFS(int start) {
         boolean[] visited = new boolean[V];
-        LinkedList<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<>();
         queue.add(start);  // enqueue
         while (!queue.isEmpty()) {
-            int u = queue.remove(); // dequeue
+            int u = queue.poll(); // dequeue
             visit(u, visited);
-            for (int v : adj[u]) { // get all adjecents for current V
+            for (int v : adj[u]) { // get all adjacent for current V
                 if (!visited[v]) {
                     queue.add(v);
                 }

@@ -25,7 +25,7 @@ public class FindMissingNumber {
      * @return
      */
     private static int getMissingNo(int[] a) {
-        int n = a.length + 1;   // remeber this step: increase number by 1 as one number is missing.
+        int n = a.length + 1;   // Remember this step: increase number by 1 as one number is missing.
         int sum = n * (n + 1) / 2;
         for (int i = 0; i < a.length; i++) {
             sum -= a[i];
@@ -48,7 +48,7 @@ public class FindMissingNumber {
         }
 
         // XOR of elements upto n;
-        int n = a.length + 1;   // remeber this step: increase number by 1 as one number is missing.
+        int n = a.length + 1;   // Remember this step: increase number by 1 as one number is missing.
         int x2 = 1;
         for (int i = 2; i <= n; i++) {
             x2 = x2 ^ i;

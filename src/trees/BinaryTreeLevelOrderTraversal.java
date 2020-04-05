@@ -35,7 +35,7 @@ public class BinaryTreeLevelOrderTraversal {
         if (root == null) {
             return 0;
         }
-        return Math.max(getHeight(root.left) + 1, getHeight(root.right) + 1);
+        return Math.max(getHeight(root.left), getHeight(root.right)) + 1;
     }
 
     private static void printLevelOrder(Node root, int height) {

@@ -4,18 +4,7 @@ package trees;
  *
  * @author Harshit
  */
-class Node {
-
-    Node left, right;
-    int data;
-
-    public Node(int item) {
-        data = item;
-    }
-
-}
-
-class BinaryTreeMirror {
+public class BinaryTreeMirror {
 
     static Node root;
 
@@ -29,7 +18,7 @@ class BinaryTreeMirror {
 
         root.right = left;
         root.left = right;
-        
+
         return root;
     }
 
@@ -41,7 +30,7 @@ class BinaryTreeMirror {
         root.left.right = new Node(5);
 
         BinaryTreeMirror tree = new BinaryTreeMirror();
-        
+
         /* print inorder traversal of the input tree */
         System.out.println("Inorder traversal of input tree is :");
         tree.inOrder(root);
@@ -61,5 +50,14 @@ class BinaryTreeMirror {
         inOrder(root.left);
         System.out.println(root.data);
         inOrder(root.right);
+    }
+}
+
+class Node {
+    Node left, right;
+    int data;
+
+    public Node(int item) {
+        data = item;
     }
 }
