@@ -23,7 +23,7 @@ public class Tree {
 
     /**
      * Binary Tree height/depth/level. Considered root at level 1 and empty tree
-     * hash height 0.
+     * has height 0.
      *
      * @param tree
      * @return

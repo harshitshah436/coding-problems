@@ -42,13 +42,25 @@ public class BinarySearchTree {
         return root;
     }
 
-    static class BinaryTreeTest {
+    static class BinarySearchTreeTest {
 
         public static void main(String[] args) {
-            BinarySearchTree bt = new BinarySearchTree();
-            bt.insertBST(50);
-            bt.insertBST(60);
+            BinarySearchTree bst = new BinarySearchTree();
+            bst.insertBST(50);
+            bst.insertBST(60);
         }
     }
-
 }
+
+class Node {
+    public Node left;
+    public Node right;
+    public int data;
+
+    public Node(int i) {
+        left = null;
+        right = null;
+        data = i;
+    }
+}
+

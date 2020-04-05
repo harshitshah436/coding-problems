@@ -13,6 +13,7 @@ public class Graph {
     int V; // no of vertices
     LinkedList<Integer>[] adj; //adjecency lists
 
+    @SuppressWarnings("unchecked")
     public Graph(int V) {
         this.V = V;
         adj = new LinkedList[V];
