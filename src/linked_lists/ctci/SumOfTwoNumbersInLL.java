@@ -14,6 +14,7 @@ package linked_lists.ctci;
  *
  * Reference: 1.
  * http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/ 2.
+ * https://leetcode.com/problems/add-two-numbers-ii/discuss/92623/Easy-O(n)-Java-Solution-using-Stack
  *
  * @author Harshit
  */
