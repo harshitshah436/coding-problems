@@ -28,48 +28,39 @@ public class SumOfTwoNumbersInLL {
      *
      * @param list
      * @param list2
+     * @return Node
      */
-    @SuppressWarnings("null")
-    public static void SumOfTwoNumbersOfLL(Node list, Node list2) {
+    public static Node SumOfTwoNumbersOfLL(Node list, Node list2) {
+        Node dummyHead = new Node(0);
+        Node current = dummyHead;
         int carry = 0;
-        Node result = null;
-        Node rest = null;
-        boolean firstNode = true;
-        while (list != null || list2 != null) {
 
-            int sum = (list != null ? list.data : 0) + (list2 != null ? list2.data : 0) + carry;
+        // Check lists are null for different sizes
+        while (list != null || list2 != null) {
+            int sum = carry;
+
+            if (list != null) {
+                sum += list.data;
+                list = list.next;
+            }
+
+            if (list2 != null) {
+                sum += list2.data;
+                list2 = list2.next;
+            }
 
             carry = sum / 10;
             sum = sum % 10;
 
-            Node temp = new Node(sum);
-
-            // if this is the first node then set it as head of the result list
-            if (firstNode) {
-                result = temp;
-                firstNode = false;
-            } else { // If this is not the first node then connect it to the rest.
-                rest.next = temp;
-            }
-
-            // Set rest for next insertion
-            rest = temp;
-
-            if (list != null) {
-                list = list.next;
-            }
-            if (list2 != null) {
-                list2 = list2.next;
-            }
+            current.next = new Node(sum);
+            current = current.next;
         }
+
         if (carry > 0) {
-            Node temp = result;
-            while (temp.next != null) {
-                temp = temp.next;
-            }
-            temp.data = temp.data + carry * 10;
+            current = new Node(carry);
         }
-        System.out.println(result);
+
+        return dummyHead.next;
     }
 
     public static void main(String[] args) {
@@ -85,6 +76,7 @@ public class SumOfTwoNumbersInLL {
 
         System.out.println(list2);
 
-        SumOfTwoNumbersOfLL(list, list2);
+        Node result = SumOfTwoNumbersOfLL(list, list2);
+        System.out.println(result);
     }
 }
