@@ -5,10 +5,12 @@
  */
 package strings;
 
+import java.util.Arrays;
+
 /**
  * 
- * See algo to store indexes and counting the current length of the substring.
- * Ref: http://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/
+ * Note: Longest unique substring, NOT subsequence. Ref:
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/solution/
  *
  * @author Harshit
  */
@@ -17,48 +19,41 @@ public class LengthOfLongestSubstringWithoutRepeatingChars {
     public static void main(String[] args) {
         String str = "ABDEFGABEF";
         System.out.printf("The input string is %s \n", str);
-        System.out.printf("The length of the longest non-repeating character substring is %d", longestUniqueSubsttr(str));
+        System.out.printf(
+                "The length of the longest non-repeating character substring is %d",
+                longestUniqueSubsttr(str));
         System.out.println("");
 
         System.out.printf("The input string is %s \n", "GEEKSFORGEEKS");
-        System.out.printf("The length of the longest non-repeating character substring is %d", longestUniqueSubsttr("GEEKSFORGEEKS"));
+        System.out.printf(
+                "The length of the longest non-repeating character substring is %d",
+                longestUniqueSubsttr("GEEKSFORGEEKS"));
         System.out.println("");
 
         System.out.printf("The input string is %s \n", "HAHARSHIT");
-        System.out.printf("The length of the longest non-repeating character substring is %d", longestUniqueSubsttr("HAHARSHIT"));
+        System.out.printf(
+                "The length of the longest non-repeating character substring is %d",
+                longestUniqueSubsttr("HAHARSHIT"));
         System.out.println("");
     }
 
+    /*
+     * Sliding Window approach
+     */
     private static int longestUniqueSubsttr(String str) {
-        int[] arr = new int[256];
-        int max_sub_len = 1, cur_sub_len = 1;
+        // Assuming ASCII 128
+        int[] index = new int[128];
+        Arrays.fill(index, -1); // Fill arrays with -1 value
+        int max_sub_len = 0;
 
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = -1;
-        }
-
-        arr[str.charAt(0)] = 0;
-
-        for (int i = 1; i < str.length(); i++) {
-
-            char ch = str.charAt(i);
-            int prev_inx = arr[str.charAt(i)];
-
-            if (prev_inx == -1 || i - cur_sub_len > prev_inx) {
-                cur_sub_len++;
-            } else {
-                if (cur_sub_len > max_sub_len) {
-                    max_sub_len = cur_sub_len;
-                }
-                cur_sub_len = i - prev_inx;
+        for (int i = 0, j = 0; i < str.length(); i++) {
+            // if char is already exist then increase j
+            if (index[str.charAt(i)] != -1) {
+                j = Math.max(index[str.charAt(i)] + 1, j);
             }
-            arr[str.charAt(i)] = i;
+            index[str.charAt(i)] = i; // store index of char
+            max_sub_len = Math.max(max_sub_len, i - j + 1);
         }
-
-        if (cur_sub_len > max_sub_len) {
-            max_sub_len = cur_sub_len;
-        }
-
         return max_sub_len;
     }
 }
