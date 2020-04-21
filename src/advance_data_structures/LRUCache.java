@@ -1,6 +1,5 @@
 package advance_data_structures;
 
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,10 +13,10 @@ import java.util.Map.Entry;
  *
  * Here, LRU (Least Recently Used) cache problem involves two main operations.
  * 1) get a value (page frame) for given key 2) Insert a value for the key. If
- * cache is full remove lease used value (page frame.)
+ * cache is full remove least used value (page frame.)
  *
  * We can think of two data structures for two operations. 1) HashMap to get a
- * value in O(1) 2) Insert a value and also remove a value in O(1). Doubly 
+ * value in O(1) 2) Insert a value and also remove a value in O(1). Doubly
  * LinkedList.
  *
  * Ref: http://androidsrc.net/lru-cache-java-implementation/
@@ -122,8 +121,8 @@ public class LRUCache {
     private void printLRUCache() {
         DoublyLinkedListNode node = start;
         while (node != null) {
-            System.out.print("Key: " + node.key + " Value: "
-                    + node.value + " ");
+            System.out
+                    .print("Key: " + node.key + " Value: " + node.value + " ");
             node = node.next;
         }
         System.out.println();
@@ -140,7 +139,8 @@ public class LRUCache {
         System.out.println("LRU Cache after retrieving 7");
         lru.printLRUCache();
         lru.set(11, 11 * 2);
-        System.out.println("LRU cache on adding one more item. It will replace last one");
+        System.out.println(
+                "LRU cache on adding one more item. It will replace last one");
         lru.printLRUCache();
     }
 
