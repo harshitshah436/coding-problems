@@ -27,102 +27,98 @@ import java.util.Map.Entry;
  */
 public class LRUCache {
 
-    int capacity; // Max cache size
-    DoublyLinkedListNode start;
-    DoublyLinkedListNode end;
-    int currentSize;
-
-    Map<Integer, DoublyLinkedListNode> nodeMap;
+    int capacity, currentSize;
+    Node head, tail;
+    Map<Integer, Node> cache;
 
     public LRUCache(int capacity) {
-        this.capacity = capacity;
-        nodeMap = new HashMap<>();
+        this.capacity = capacity; // Max cache size
+        cache = new HashMap<>();
     }
 
-    private void set(int key, int value) {
-
-        if (nodeMap.containsKey(key)) {
-            DoublyLinkedListNode node = nodeMap.get(key);
-            node.value = value;
-            bringNodeToFront(node);
-        } else {
-            DoublyLinkedListNode node = new DoublyLinkedListNode(key, value);
-            if (currentSize < capacity) {
-                addNodeToFront(node);
-                currentSize++;
-            } else {
-                nodeMap.remove(end.key);
-                removeLastQueueNode();
-                addNodeToFront(node);
-            }
-            nodeMap.put(node.key, node);
-        }
-    }
-
-    private int get(int key) {
-        if (nodeMap.containsKey(key)) {
-            DoublyLinkedListNode node = nodeMap.get(key);
-            bringNodeToFront(node);
+    public int get(int key) {
+        Node node = cache.get(key);
+        if (node != null) {
+            moveNodeToHead(node);
             return node.value;
         }
         return -1;
     }
 
-    private void bringNodeToFront(DoublyLinkedListNode node) {
+    public void put(int key, int value) {
+        Node node = cache.get(key);
+        if (node == null) {
+            node = new Node(key, value);
+            if (currentSize == capacity) {
+                cache.remove(tail.key);
+                removeTailNode();
+            } else {
+                currentSize++;
+            }
+            addNodeToHead(node);
+            cache.put(node.key, node);
+        } else {
+            node.value = value;
+            moveNodeToHead(node);
+        }
+    }
+
+    private void moveNodeToHead(Node node) {
+        removeNode(node);
+        addNodeToHead(node);
+    }
+
+    private void removeNode(Node node) {
         if (node.prev != null) {
             node.prev.next = node.next;
         } else {
-            start = node.next;
+            head = node.next;
         }
 
         if (node.next != null) {
             node.next.prev = node.prev;
         } else {
-            end = node.prev;
+            tail = node.prev;
         }
-
-        addNodeToFront(node);
     }
 
-    private void addNodeToFront(DoublyLinkedListNode node) {
-        node.next = start;
+    private void addNodeToHead(Node node) {
+        node.next = head;
         node.prev = null;
-        if (start != null) {
-            start.prev = node;
+        if (head != null) {
+            head.prev = node;
         }
-        start = node;
-        if (end == null) {
-            end = node;
+        head = node;
+        if (tail == null) {
+            tail = node;
         }
     }
 
-    private void removeLastQueueNode() {
-        end = end.prev;
-        if (end != null) {
-            end.next = null;
+    private void removeTailNode() {
+        tail = tail.prev;
+        if (tail != null) {
+            tail.next = null;
         } else {
-            start = null;
+            head = null;
         }
     }
 
-    private class DoublyLinkedListNode {
+    /* Doubly Linked List Node */
+    private class Node {
+        Node prev, next;
+        int key, value;
 
-        DoublyLinkedListNode prev;
-        DoublyLinkedListNode next;
-        int key;
-        int value;
-
-        public DoublyLinkedListNode(int key, int value) {
+        public Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
     }
 
     private void printLRUCache() {
-        DoublyLinkedListNode node = start;
+        Node node = head;
         while (node != null) {
-            System.out
-                    .print("Key: " + node.key + " Value: " + node.value + " ");
+            System.out.print(
+                    "[Key: " + node.key + " Value: " + node.value + "] ");
             node = node.next;
         }
         System.out.println();
@@ -131,32 +127,59 @@ public class LRUCache {
     public static void main(String[] args) {
         LRUCache lru = new LRUCache(5);
         for (int i = 5; i < 11; i++) {
-            lru.set(i, i * 2);
+            lru.put(i, i * 2);
         }
         System.out.println("LRU Cache after creation");
         lru.printLRUCache();
         lru.get(7);
         System.out.println("LRU Cache after retrieving 7");
         lru.printLRUCache();
-        lru.set(11, 11 * 2);
+        lru.put(11, 11 * 2);
         System.out.println(
                 "LRU cache on adding one more item. It will replace last one");
         lru.printLRUCache();
     }
 
     /**
-     * LRU Cache using Java's built-in LinkedHashMap.
+     * LRU Cache using Java's built-in LinkedHashMap. (Lazy implementation)
+     */
+    @SuppressWarnings({ "unused", "serial" })
+    private class LRUCache2 {
+        private LinkedHashMap<Integer, Integer> lru;
+
+        public LRUCache2(int capacity) {
+            lru = new LinkedHashMap<>(capacity, 0.75f, true) {
+                protected boolean removeEldestEntry(
+                        Map.Entry<Integer, Integer> eldest) {
+                    return size() > capacity;
+                }
+            };
+        }
+
+        public int get(int key) {
+            return lru.getOrDefault(key, -1);
+        }
+
+        public void put(int key, int value) {
+            lru.put(key, value);
+        }
+    }
+
+    /**
+     * LRU Cache using Java's built-in LinkedHashMap. Directly extends the
+     * class.
      *
      * Ref: http://chriswu.me/blog/a-lru-cache-in-10-lines-of-java/
      *
      * @param <K>
      * @param <V>
      */
-    private class LRUCache2<K, V> extends LinkedHashMap<K, V> {
+    @SuppressWarnings({ "unused", "serial" })
+    private class LRUCache3<K, V> extends LinkedHashMap<K, V> {
 
         int capacity;
 
-        public LRUCache2(int capacity) {
+        public LRUCache3(int capacity) {
             super(capacity, 0.75f, true);
             this.capacity = capacity;
         }
